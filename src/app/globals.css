@@ -1,0 +1,275 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/*
+ * Paleta do protótipo do Sophia no Figma (arquivo Jles7wHGaQaohjS8hQ6Rnk).
+ * Tons quentes de papel com um verde-petróleo de apoio; os nomes seguem o
+ * vocabulário do projeto para que as utilitárias fiquem legíveis no JSX.
+ */
+@theme {
+  --color-fundo: #f5f1ec;
+  --color-superficie: #f6f2ed;
+  --color-painel: #f7f4f0;
+  --color-barra: #ede8e0;
+  --color-trilha: #e5e0d6;
+  --color-borda: #d1c9bd;
+  --color-tinta: #1c1b1a;
+  --color-tinta-suave: #6b665e;
+  --color-destaque: #356660;
+  --color-destaque-suave: #cfe4e0;
+  --color-acao: #24211f;
+  --color-acao-tinta: #ffffff;
+  --color-campo: #ffffff;
+  --color-chip: #f6f2ed;
+  --color-ativo: #ffffff;
+  --color-ativo-tinta: #356660;
+  --color-meta: #356660;
+  --color-gravando: #6bb88c;
+}
+
+:root {
+  /* A interface é clara por decisão de marca; evita barras de rolagem e controles
+     de formulário escuros do navegador em sistemas com tema escuro. */
+  color-scheme: light;
+  /* O tema do shadcn mapeia --font-sans; as fontes vêm do next/font no layout raiz. */
+  --font-sans: var(--font-inter);
+
+  /* Tokens semânticos do shadcn apontando para a paleta do protótipo, para que
+     Button, Tooltip e afins herdem a marca sem precisar de classes extras. */
+  --background: var(--color-fundo);
+  --foreground: var(--color-tinta);
+  --card: var(--color-superficie);
+  --card-foreground: var(--color-tinta);
+  --popover: var(--color-campo);
+  --popover-foreground: var(--color-tinta);
+  --primary: var(--color-acao);
+  --primary-foreground: var(--color-acao-tinta);
+  --secondary: var(--color-barra);
+  --secondary-foreground: var(--color-tinta);
+  --muted: var(--color-barra);
+  --muted-foreground: var(--color-tinta-suave);
+  --accent: var(--color-destaque-suave);
+  --accent-foreground: var(--color-destaque);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: var(--color-borda);
+  --input: var(--color-borda);
+  --ring: var(--color-destaque);
+  --radius: 0.625rem;
+}
+
+/*
+ * Hex dos frames "01 - Login (Dark)" e "02 - Dashboard (Dark)"
+ * (arquivo Jles7wHGaQaohjS8hQ6Rnk, nós 178:13 e 178:35).
+ */
+html.dark {
+  color-scheme: dark;
+  --color-fundo: #1c1c1f;
+  --color-superficie: #29292e;
+  --color-painel: #1f1f24;
+  --color-barra: #17171a;
+  --color-trilha: #121214;
+  --color-borda: #595961;
+  --color-tinta: #f7f7fa;
+  --color-tinta-suave: #b2b2ba;
+  --color-destaque: #4e8f87;
+  --color-destaque-suave: #243634;
+  --color-acao: #f7f7fa;
+  --color-acao-tinta: #1c1c1f;
+  --color-campo: #2b2b30;
+  --color-chip: #333338;
+  --color-ativo: #f7f7fa;
+  --color-ativo-tinta: #1c1c1f;
+  --color-meta: #d1d1d6;
+  --color-gravando: #6bb88c;
+}
+
+html[data-destaque="verde"] {
+  --color-destaque: #356660;
+  --color-destaque-suave: #cfe4e0;
+  --color-acao: #356660;
+  --color-acao-tinta: #ffffff;
+  --color-ativo-tinta: #356660;
+  --color-meta: #356660;
+}
+
+html.dark[data-destaque="verde"] {
+  --color-destaque: #4e8f87;
+  --color-destaque-suave: #243634;
+  --color-acao: #4e8f87;
+  --color-acao-tinta: #1c1c1f;
+  --color-ativo-tinta: #1c1c1f;
+  --color-meta: #4e8f87;
+}
+
+html[data-destaque="branco"] {
+  --color-destaque: #6b665e;
+  --color-destaque-suave: #f3efe9;
+  --color-acao: #ffffff;
+  --color-acao-tinta: #1c1b1a;
+  --color-ativo-tinta: #1c1b1a;
+  --color-meta: #6b665e;
+}
+
+html.dark[data-destaque="branco"] {
+  --color-destaque: #f7f7fa;
+  --color-destaque-suave: #2b2b30;
+  --color-acao: #f7f7fa;
+  --color-acao-tinta: #1c1c1f;
+  --color-ativo-tinta: #1c1c1f;
+  --color-meta: #f7f7fa;
+}
+
+html[data-destaque="azul"] {
+  --color-destaque: #2f5a8c;
+  --color-destaque-suave: #d5e2ef;
+  --color-acao: #2f5a8c;
+  --color-acao-tinta: #ffffff;
+  --color-ativo-tinta: #2f5a8c;
+  --color-meta: #2f5a8c;
+}
+
+html.dark[data-destaque="azul"] {
+  --color-destaque: #5b8ab8;
+  --color-destaque-suave: #1c2634;
+  --color-acao: #5b8ab8;
+  --color-acao-tinta: #121214;
+  --color-ativo-tinta: #121214;
+  --color-meta: #5b8ab8;
+}
+
+html[data-destaque="laranja"] {
+  --color-destaque: #b05620;
+  --color-destaque-suave: #f0dcc8;
+  --color-acao: #b05620;
+  --color-acao-tinta: #ffffff;
+  --color-ativo-tinta: #b05620;
+  --color-meta: #b05620;
+}
+
+html.dark[data-destaque="laranja"] {
+  --color-destaque: #d08040;
+  --color-destaque-suave: #2e2218;
+  --color-acao: #d08040;
+  --color-acao-tinta: #1c1c1f;
+  --color-ativo-tinta: #1c1c1f;
+  --color-meta: #d08040;
+}
+
+html[data-destaque="roxo"] {
+  --color-destaque: #5a3d82;
+  --color-destaque-suave: #e2d6ee;
+  --color-acao: #5a3d82;
+  --color-acao-tinta: #ffffff;
+  --color-ativo-tinta: #5a3d82;
+  --color-meta: #5a3d82;
+}
+
+html.dark[data-destaque="roxo"] {
+  --color-destaque: #9a70c0;
+  --color-destaque-suave: #281e32;
+  --color-acao: #9a70c0;
+  --color-acao-tinta: #121214;
+  --color-ativo-tinta: #121214;
+  --color-meta: #9a70c0;
+}
+
+html[data-destaque="branco"] .bg-acao {
+  border: 1px solid var(--color-borda);
+}
+
+/* Login sempre no padrão do protótipo; a cor escolhida vale só após entrar. */
+html[data-destaque] .tela-login {
+  --color-destaque: #47807a;
+  --color-destaque-suave: #e0f0ed;
+  --color-acao: #24211f;
+  --color-acao-tinta: #ffffff;
+  --color-ativo-tinta: #47807a;
+  --color-meta: #47807a;
+}
+
+html.dark[data-destaque] .tela-login {
+  --color-destaque: #66a69e;
+  --color-destaque-suave: #2e4240;
+  --color-acao: #f7f7fa;
+  --color-acao-tinta: #1c1c1f;
+  --color-ativo-tinta: #1c1c1f;
+  --color-meta: #d1d1d6;
+}
+
+html[data-destaque] .tela-login .bg-acao {
+  border-color: transparent;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+  button:not(:disabled) {
+    cursor: pointer;
+    transition:
+      transform 140ms ease,
+      filter 140ms ease,
+      background-color 140ms ease,
+      border-color 140ms ease,
+      color 140ms ease,
+      opacity 140ms ease;
+  }
+  button:not(:disabled):active {
+    transform: scale(0.96);
+    filter: brightness(0.94);
+  }
+}
+
+@layer utilities {
+  .pressionavel {
+    cursor: pointer;
+    transition:
+      transform 140ms ease,
+      filter 140ms ease,
+      background-color 140ms ease,
+      border-color 140ms ease;
+  }
+  .pressionavel:active {
+    transform: scale(0.96);
+    filter: brightness(0.94);
+  }
+}
