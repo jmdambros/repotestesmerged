@@ -58,7 +58,7 @@ def criar_router(buscar_transcricao: BuscarTranscricao, mongo_ativo: Callable[[]
 
     async def _transcricao(user_id: str, caso_id: str, fallback: Optional[str] = None) -> Optional[str]:
         texto = await buscar_transcricao(user_id.strip(), caso_id.strip())
-        if texto is None and not mongo_ativo() and fallback:
+        if texto is None and fallback:
             texto = fallback
         return (texto or "").strip() or None
 
